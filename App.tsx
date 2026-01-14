@@ -24,7 +24,7 @@ function App() {
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const newFiles = Array.from(e.target.files).map(f => f.name);
+      const newFiles = Array.from(e.target.files).map((f: File) => f.name);
       setFiles([...files, ...newFiles]);
     }
   };

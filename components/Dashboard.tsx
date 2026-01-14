@@ -10,7 +10,8 @@ import {
   DollarSign, 
   Activity,
   Briefcase,
-  ExternalLink
+  ExternalLink,
+  Globe
 } from 'lucide-react';
 
 interface DashboardProps {
@@ -84,9 +85,25 @@ export const Dashboard: React.FC<DashboardProps> = ({ analysis, onNewAnalysis })
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
         {/* Title Section */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">{analysis.companyName}</h2>
-          <p className="text-slate-500">Comprehensive financial assessment and strategic outlook.</p>
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-3">
+              <h2 className="text-3xl font-bold text-slate-900">{analysis.companyName}</h2>
+              {analysis.website && (
+                <a 
+                  href={analysis.website} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full hover:bg-indigo-100 transition-colors text-sm font-medium group"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  Visit Website
+                  <ExternalLink className="w-3 h-3 opacity-50 group-hover:opacity-100" />
+                </a>
+              )}
+            </div>
+            <p className="text-slate-500 mt-2">Comprehensive financial assessment and strategic outlook.</p>
+          </div>
         </div>
 
         {/* Executive Summary & Sources */}

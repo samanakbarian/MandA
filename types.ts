@@ -20,6 +20,7 @@ export interface RiskFactor {
 
 export interface CompanyAnalysis {
   companyName: string;
+  website?: string; // Official website URL
   executiveSummary: string;
   metrics: FinancialMetric[];
   swot: SWOTItem[];

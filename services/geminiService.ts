@@ -16,7 +16,7 @@ export const analyzeCompany = async (
   if (useSearch) {
     prompt = `
       You are a senior M&A analyst. 
-      Action: Search for the latest "Årsredovisning" (Annual Report) and financial news for the company: "${companyName}".
+      Action: Search for the latest "Årsredovisning" (Annual Report), financial news, and the official website for the company: "${companyName}".
       
       Your goal is to extract real financial data from search results to perform a deep financial analysis.
       
@@ -38,6 +38,7 @@ export const analyzeCompany = async (
     3. A detailed SWOT analysis (at least 2 items per category).
     4. A risk assessment covering Financial, Legal, ESG, and Operational risks with risk levels (Low/Medium/High).
     5. Calculate the 3-year CAGR for Revenue based on the data you provide.
+    6. The official website URL of the company (if found).
     
     Ensure the tone is professional, concise, and objective.
   `;
@@ -47,6 +48,7 @@ export const analyzeCompany = async (
     type: Type.OBJECT,
     properties: {
       companyName: { type: Type.STRING },
+      website: { type: Type.STRING, description: "Official company website URL (e.g., https://www.company.com)" },
       executiveSummary: { type: Type.STRING },
       cagr: { type: Type.NUMBER, description: "3-year Revenue CAGR as a percentage (e.g. 15.5)" },
       lastUpdated: { type: Type.STRING, description: "Current date YYYY-MM-DD" },
@@ -153,6 +155,7 @@ export const findTargets = async (criteria: SourcingCriteria): Promise<Candidate
     1. Estimate their tech stack based on public job listings or tech blogs (e.g., "Hiring React developers" -> Tech Stack: React).
     2. Assign a 'Match Score' (0-100) based on how well they fit the user's specific tech and industry criteria.
     3. Identify growth signals (e.g., "Recently raised Series A", "Expanding to new markets").
+    4. Find the official website URL.
   `;
 
   const responseSchema = {
